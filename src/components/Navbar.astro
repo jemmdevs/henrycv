@@ -6,7 +6,7 @@
     <div class="grid grid-cols-12 gap-3">
       <!-- Henry Matthews: columnas 1-4 -->
       <div class="col-span-4">
-        <h1 class="font-medium" style="font-size: 15px; line-height: 21px;">Henry Matthews</h1>
+        <a href="/" class="name-link font-medium" style="font-size: 15px; line-height: 21px;">Henry Matthews</a>
       </div>
       
       <!-- Segunda mitad: columnas 7-12, mismo layout que Work Experience -->
@@ -29,4 +29,16 @@
     <div class="border-b" style="border-color: #1a1a1a;"></div>
   </div>
 </nav>
+
+<style>
+  .name-link {
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .name-link:hover {
+    color: #fde047;
+  }
+</style>
 
