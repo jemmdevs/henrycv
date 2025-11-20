@@ -6,6 +6,9 @@ export default {
       colors: {
         background: '#111111',
         muted: '#71717a',
+        'yellow-300': '#FDE047',
+        'zinc-100': '#f4f4f5',
+        'zinc-600': '#52525b',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

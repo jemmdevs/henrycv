@@ -2,66 +2,79 @@
 ---
 
 <footer class="sticky bottom-0 z-[1] dot-grid" style="background-color: #1C1C1C;">
-  <div class="grid grid-cols-12 gap-y-8 px-3 pt-4 pb-16 max-w-[1800px] mx-auto">
+  <div class="grid grid-cols-12 gap-y-8 px-3 pt-4 pb-16 max-w-[1800px] mx-auto text-zinc-100">
     
-    <!-- Versión + Update - Columnas 1-5 -->
+    <!-- Version Badge - Columnas 1-5 -->
     <div class="col-span-12 md:col-span-5 space-y-2">
-      <p style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 160%; color: #71717a;">
-        VERSION 2025
-      </p>
-      <p style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 160%; color: #71717a;">
-        Last updated November 2025
-      </p>
+      <span class="flex flex-row gap-2">
+        <!-- Badge amarillo -->
+        <p class="px-2 pt-1 pb-[2px] border border-yellow-300 rounded-full text-yellow-300 lowercase" style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 160%;">
+          v4.3.0
+        </p>
+        <!-- Fecha actualización -->
+        <p class="px-2 pt-1 pb-[2px] text-zinc-600 uppercase" style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 160%;">
+          Last updated 2025-11-27
+        </p>
+      </span>
     </div>
 
     <!-- Social Links - Columnas 7-8 -->
-    <div class="col-span-12 md:col-start-7 md:col-span-2 space-y-1">
-      <a 
-        href="https://twitter.com" 
-        target="_blank" 
-        class="block font-medium hover:opacity-80 transition-opacity"
-        style="font-size: 15px; line-height: 140%;"
-      >
-        Twitter
-      </a>
-      <a 
-        href="https://linkedin.com" 
-        target="_blank" 
-        class="block font-medium hover:opacity-80 transition-opacity"
-        style="font-size: 15px; line-height: 140%;"
-      >
-        LinkedIn
-      </a>
-      <a 
-        href="https://github.com" 
-        target="_blank" 
-        class="block font-medium hover:opacity-80 transition-opacity"
-        style="font-size: 15px; line-height: 140%;"
-      >
-        GitHub
-      </a>
-      <a 
-        href="https://read.cv" 
-        target="_blank" 
-        class="block font-medium hover:opacity-80 transition-opacity"
-        style="font-size: 15px; line-height: 140%;"
-      >
-        Read.cv
-      </a>
+    <div class="col-span-12 md:col-start-7 md:col-span-2">
+      <span class="flex flex-col space-y-1">
+        <p>
+          <a 
+            href="https://read.cv" 
+            target="_blank" 
+            class="footer-link"
+          >
+            Reading<sup class="superscript">1</sup>
+          </a>
+        </p>
+        <p>
+          <a 
+            href="https://linkedin.com" 
+            target="_blank" 
+            class="footer-link"
+          >
+            Linkedin<sup class="superscript">2</sup>
+          </a>
+        </p>
+        <p>
+          <a 
+            href="https://instagram.com" 
+            target="_blank" 
+            class="footer-link"
+          >
+            Instagram<sup class="superscript">3</sup>
+          </a>
+        </p>
+        <p>
+          <a 
+            href="https://twitter.com" 
+            target="_blank" 
+            class="footer-link"
+          >
+            Twitter<sup class="superscript">4</sup>
+          </a>
+        </p>
+      </span>
     </div>
 
     <!-- Email CTA - Columnas 9-12 -->
-    <div class="col-span-12 md:col-start-9 md:col-span-4 space-y-1">
-      <p class="font-medium" style="font-size: 15px; line-height: 140%;">
-        Have an interesting idea?
-      </p>
-      <a 
-        href="mailto:hello@henrymatthews.com" 
-        class="block font-medium hover:opacity-80 transition-opacity"
-        style="font-size: 15px; line-height: 140%;"
-      >
-        Get in touch →
-      </a>
+    <div class="col-span-12 md:col-start-9 md:col-span-4">
+      <div class="flex flex-col space-y-1">
+        <p class="font-medium" style="font-size: 15px; line-height: 140%;">
+          Let's build something together.
+        </p>
+        <span>
+          <a 
+            href="mailto:hello@henrymatthews.com" 
+            class="footer-link"
+          >
+            hello@henrymatthews.com<sup class="superscript">5</sup>
+          </a>
+        </span>
+      </div>
     </div>
 
   </div>
@@ -72,6 +85,31 @@
     background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
     background-size: 20px 20px;
     background-position: -19px -19px;
+  }
+
+  .footer-link {
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 140%;
+    font-weight: 500;
+    padding: 2px 2px;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+    transition: all 0.2s ease;
+  }
+
+  .footer-link:hover {
+    background-color: rgba(253, 224, 71, 0.1);
+    color: #FDE047;
+    border-bottom-color: #FDE047;
+  }
+
+  .superscript {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 0;
+    color: #FDE047;
+    margin-left: 2px;
   }
 </style>
 
