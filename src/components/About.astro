@@ -28,19 +28,23 @@ const experiences = [
 ];
 ---
 
-<section class="my-6 px-3">
+<section class="mt-8 mb-6 md:mt-6 px-3">
   <div class="grid grid-cols-12 gap-3">
-    <!-- About text: columnas 1-5 (≈42%) -->
-    <div class="col-span-5">
+    <!-- About text: 
+         Mobile: 12 columnas (100%, stack arriba)
+         Desktop: columnas 1-5 (≈42%, lado izquierdo) -->
+    <div class="col-span-12 md:col-span-5">
       <h2 class="uppercase mb-3" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">ABOUT</h2>
-      <p class="font-medium" style="font-size: 15px; line-height: 21px;">
+      <p class="font-medium about-text">
         I design software with the belief it's one of the most malleable mediums we have. At the moment, I'm interested in how tools connect with each other, how they act on our behalf, and how we interact with them across different modes. I studied Communication Design and Human-Computer Interaction at Carnegie Mellon University, an experience I hold fondly and will cherish for the rest of my life. If you have an interesting idea, get in touch.
       </p>
     </div>
 
-    <!-- Work Experience: columnas 7-12 (≈50%) -->
-    <div class="col-span-6 col-start-7">
-      <!-- Headers: subgrid de 6 columnas -->
+    <!-- Work Experience: 
+         Mobile: 12 columnas (100%, stack abajo)
+         Desktop: columnas 7-12 (≈50%, lado derecho) -->
+    <div class="col-span-12 md:col-span-6 md:col-start-7 mt-6 md:mt-0">
+      <!-- Headers: subgrid de 6 columnas (Team 33% + Description 67%) -->
       <div class="grid grid-cols-6 gap-3 mb-3">
         <h2 class="col-span-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">TEAM</h2>
         <h2 class="col-span-4 col-start-3 uppercase" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">DESCRIPTION</h2>
@@ -51,13 +55,13 @@ const experiences = [
         {experiences.map((exp) => (
           <div class="grid grid-cols-6 gap-3">
             <div class="col-span-2">
-              <h3 class="font-medium mb-1" style="font-size: 15px; line-height: 21px;">{exp.team}</h3>
+              <h3 class="font-medium mb-1 body-text">{exp.team}</h3>
               {exp.period && (
-                <p class="font-medium text-white" style="font-size: 15px; line-height: 21px;">{exp.period}</p>
+                <p class="font-medium text-white body-text">{exp.period}</p>
               )}
             </div>
             <div class="col-span-4 col-start-3">
-              <p class="font-medium" style="font-size: 15px; line-height: 21px;">{exp.description}</p>
+              <p class="font-medium body-text">{exp.description}</p>
             </div>
           </div>
         ))}
@@ -65,4 +69,22 @@ const experiences = [
     </div>
   </div>
 </section>
+
+<style>
+  /* Mobile: 14px / 20px */
+  .about-text,
+  .body-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* Desktop (≥768px): 15px / 21px */
+  @media (min-width: 768px) {
+    .about-text,
+    .body-text {
+      font-size: 15px;
+      line-height: 21px;
+    }
+  }
+</style>
 

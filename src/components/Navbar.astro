@@ -4,20 +4,28 @@
 <nav class="fixed top-0 left-0 right-0 bg-background z-[300]">
   <div class="px-3 py-4">
     <div class="grid grid-cols-12 gap-3">
-      <!-- Henry Matthews: columnas 1-4 -->
+      <!-- J. Enrique Mateo: columnas 1-4 (33%) - siempre visible -->
       <div class="col-span-4">
-        <a href="/" class="name-link font-medium" style="font-size: 15px; line-height: 21px;">Henry Matthews</a>
+        <!-- Mobile: solo "J. Enrique" -->
+        <a href="/" class="name-link font-medium md:hidden" style="font-size: 15px; line-height: 21px;">J. Enrique</a>
+        <!-- Desktop: nombre completo "J. Enrique Mateo" -->
+        <a href="/" class="name-link font-medium hidden md:inline" style="font-size: 15px; line-height: 21px;">J. Enrique Mateo</a>
       </div>
       
-      <!-- Segunda mitad: columnas 7-12, mismo layout que Work Experience -->
-      <div class="col-span-6 col-start-7">
+      <!-- Mobile: Interaction Designer ocupa 6 columnas (50%) -->
+      <!-- Desktop: Interaction Designer + Seville, SE con subgrid -->
+      <div class="col-span-6 col-start-7 md:col-span-6 md:col-start-7">
         <div class="grid grid-cols-6 gap-3">
-          <!-- Interaction Designer: 2 columnas -->
-          <div class="col-span-2">
+          <!-- Interaction Designer: 
+               Mobile: 6 columnas completas
+               Desktop: 2 columnas (alineado con TEAM) -->
+          <div class="col-span-6 md:col-span-2">
             <div class="font-medium" style="font-size: 15px; line-height: 21px;">Interaction Designer</div>
           </div>
-          <!-- Seville, SE: col-start-3, exactamente como DESCRIPTION -->
-          <div class="col-span-4 col-start-3">
+          <!-- Seville, SE: 
+               Mobile: OCULTO
+               Desktop: col-start-3, 4 columnas (alineado con DESCRIPTION) -->
+          <div class="hidden md:block md:col-span-4 md:col-start-3">
             <div class="font-medium" style="font-size: 15px; line-height: 21px;">Seville, SE</div>
           </div>
         </div>
