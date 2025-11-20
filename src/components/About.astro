@@ -1,0 +1,68 @@
+---
+const experiences = [
+  {
+    team: "Notion",
+    period: "2025 - Present",
+    description: "Notion Calendar, AI Meeting Notes, and much more"
+  },
+  {
+    team: "Azuki",
+    period: "2023 - 2025",
+    description: "First full-time design hire. Scaled design team to 5 people. Built Anime.com, Animee, and interactive experiences for the Azuki IP"
+  },
+  {
+    team: "Independent Practice",
+    period: "",
+    description: "Design consulting for emerging AI and productivity companies. Notable clients include Cursor, Rox, Endex, and Paraform."
+  },
+  {
+    team: "Skiff",
+    period: "2022 - 2023",
+    description: "First full-time design hire. 0→1 design for Email, Editor, Drive, Calendar. Scaled Skiff Mail to 1M+ users. Recently acquired by Notion."
+  },
+  {
+    team: "Apple",
+    period: "2020 - 2021",
+    description: "Two summers at Apple working on conversational AI interfaces for Siri in the AI/ML Organization. Explored multimodal patterns and new behaviors empowered by natural language input."
+  }
+];
+---
+
+<section class="my-6 px-3">
+  <div class="grid grid-cols-12 gap-3">
+    <!-- About text: columnas 1-5 (≈42%) -->
+    <div class="col-span-5">
+      <h2 class="uppercase mb-3" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">ABOUT</h2>
+      <p class="font-medium" style="font-size: 15px; line-height: 21px;">
+        I design software with the belief it's one of the most malleable mediums we have. At the moment, I'm interested in how tools connect with each other, how they act on our behalf, and how we interact with them across different modes. I studied Communication Design and Human-Computer Interaction at Carnegie Mellon University, an experience I hold fondly and will cherish for the rest of my life. If you have an interesting idea, get in touch.
+      </p>
+    </div>
+
+    <!-- Work Experience: columnas 7-12 (≈50%) -->
+    <div class="col-span-6 col-start-7">
+      <!-- Headers: subgrid de 6 columnas -->
+      <div class="grid grid-cols-6 gap-3 mb-3">
+        <h2 class="col-span-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">TEAM</h2>
+        <h2 class="col-span-4 col-start-3 uppercase" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">DESCRIPTION</h2>
+      </div>
+
+      <!-- Experiences -->
+      <div class="space-y-3">
+        {experiences.map((exp) => (
+          <div class="grid grid-cols-6 gap-3">
+            <div class="col-span-2">
+              <h3 class="font-medium mb-1" style="font-size: 15px; line-height: 21px;">{exp.team}</h3>
+              {exp.period && (
+                <p class="font-medium text-white" style="font-size: 15px; line-height: 21px;">{exp.period}</p>
+              )}
+            </div>
+            <div class="col-span-4 col-start-3">
+              <p class="font-medium" style="font-size: 15px; line-height: 21px;">{exp.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
