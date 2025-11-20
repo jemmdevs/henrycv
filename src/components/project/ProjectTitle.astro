@@ -1,0 +1,38 @@
+---
+interface Props {
+  role: string;
+}
+
+const { role } = Astro.props;
+---
+
+<div class="col-span-full md:col-end-4 md:sticky md:top-[5em] self-start text-zinc-100">
+  <h1 class="mb-1 body-text">
+    <slot />
+  </h1>
+  <p class="caption-text text-zinc-500 uppercase">
+    {role}
+  </p>
+</div>
+
+<style>
+  .body-text {
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .body-text {
+      font-size: 15px;
+    }
+  }
+
+  .caption-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    line-height: 160%;
+    letter-spacing: 0.08em;
+  }
+</style>
+

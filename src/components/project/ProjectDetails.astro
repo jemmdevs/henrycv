@@ -1,0 +1,61 @@
+---
+interface Props {
+  role?: string;
+  collaborators?: string;
+  duration?: string;
+  tools?: string;
+}
+
+const { role, collaborators, duration, tools } = Astro.props;
+---
+
+<!-- Mobile: 2 filas × 2 cols, Desktop: 1 fila × 4 cols dentro de cols 5-12 -->
+{role && (
+  <div class="col-start-1 col-end-7 md:col-start-5 md:col-end-7 md:mb-8">
+    <p class="text-white/40 caption-text uppercase mb-1">Role</p>
+    <p class="text-white body-text">{role}</p>
+  </div>
+)}
+
+{collaborators && (
+  <div class="col-start-7 col-end-13 md:col-start-7 md:col-end-9 md:mb-8">
+    <p class="text-white/40 caption-text uppercase mb-1">Collaborators</p>
+    <p class="text-white body-text">{collaborators}</p>
+  </div>
+)}
+
+{duration && (
+  <div class="col-start-1 col-end-7 mb-8 md:col-start-9 md:col-end-11">
+    <p class="text-white/40 caption-text uppercase mb-1">Duration</p>
+    <p class="text-white body-text">{duration}</p>
+  </div>
+)}
+
+{tools && (
+  <div class="col-start-7 col-end-13 mb-8 md:col-start-11 md:col-end-13">
+    <p class="text-white/40 caption-text uppercase mb-1">Tools</p>
+    <p class="text-white body-text">{tools}</p>
+  </div>
+)}
+
+<style>
+  .caption-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    line-height: 160%;
+    letter-spacing: 0.08em;
+  }
+
+  .body-text {
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .body-text {
+      font-size: 15px;
+    }
+  }
+</style>
+

@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectHero from '../../components/project/ProjectHero.astro';
+import ProjectTitle from '../../components/project/ProjectTitle.astro';
+import ProjectBody from '../../components/project/ProjectBody.astro';
+import ProjectDetails from '../../components/project/ProjectDetails.astro';
+import LinkCard from '../../components/project/LinkCard.astro';
+import ProjectMedia from '../../components/project/ProjectMedia.astro';
+import Divider from '../../components/project/Divider.astro';
+import Spacer from '../../components/project/Spacer.astro';
+---
+
+<Layout title="Azuki - Enrique Mateo">
+  <!-- Contenido Principal - z-index ALTO + background sólido -->
+  <div class="relative z-[200] bg-background">
+    <div class="bg-background pb-8">
+      <Navbar showClose={true} />
+      <div style="padding-top: 53px;">
+        
+        <!-- Main Container -->
+        <main class="min-h-[70vh]">
+          <!-- Grid Container -->
+          <div class="px-3 pt-0 pb-6 max-w-[1800px] mx-auto">
+            <div class="grid grid-cols-12 gap-3">
+            
+            <!-- Hero -->
+            <ProjectHero content="/images/azuki.avif" />
+            
+            <!-- Título sticky (izquierda) -->
+            <ProjectTitle role="CONSUMER PRODUCT">
+              Azuki
+            </ProjectTitle>
+            
+            <!-- Descripción (derecha) -->
+            <ProjectBody col={2}>
+              <p>
+                Azuki is a technology company pioneering on-chain integration with with media, physical collectibles, and gaming. Since launch, they have worked with brands like Line Friends↗, Patrick Mahomes↗, Ambush Streetwear↗, Epik High↗, and RedBull Racing↗. As a product designer, I lead design for all our digital interactive experiences.
+              </p>
+            </ProjectBody>
+            
+            <!-- Detalles -->
+            <ProjectDetails 
+              role="Product Design"
+              collaborators="5 Designers"
+              duration="2023 - 2025"
+              tools="Figma, Framer"
+            />
+            
+            <!-- Links -->
+            <LinkCard col={1} href="https://azuki.com">
+              Visit Azuki.com →
+            </LinkCard>
+            <LinkCard col={2} href="https://anime.com">
+              Visit Anime.com →
+            </LinkCard>
+            
+            <!-- Divisor -->
+            <Divider />
+            
+            <!-- Sección 1: Marketplace -->
+            <ProjectBody title="Marketplace Experience" col={1}>
+              Redesigned the Azuki marketplace to improve discoverability and transaction flow. Focused on making NFT trading more intuitive for both crypto-native and mainstream users.
+            </ProjectBody>
+            
+            <ProjectMedia src="/images/azuki.avif">
+              Marketplace homepage with featured collections
+            </ProjectMedia>
+            
+            <!-- Sección 2: Community -->
+            <ProjectBody title="Community Platform" col={1}>
+              Built tools for the Azuki community to connect, share, and collaborate. Created spaces for collectors to showcase their NFTs and participate in governance decisions.
+            </ProjectBody>
+            
+            <ProjectMedia src="/images/azuki.avif">
+              Community dashboard
+            </ProjectMedia>
+            
+            </div>
+          </div>
+        </main>
+        
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <Footer />
+</Layout>
+

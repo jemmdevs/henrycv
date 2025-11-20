@@ -1,0 +1,28 @@
+---
+interface Props {
+  content: string;
+  isVideo?: boolean;
+}
+
+const { content, isVideo = false } = Astro.props;
+---
+
+<div class="col-span-12 h-[60vw] md:h-[50vw] mb-2 md:mb-6 overflow-hidden relative select-none">
+  {isVideo ? (
+    <video 
+      src={content}
+      class="w-full h-full object-cover"
+      autoplay
+      loop
+      muted
+      playsinline
+    />
+  ) : (
+    <img 
+      src={content}
+      alt="Project hero"
+      class="w-full h-full object-cover"
+    />
+  )}
+</div>
+

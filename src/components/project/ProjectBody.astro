@@ -1,0 +1,46 @@
+---
+interface Props {
+  col?: number;
+  title?: string;
+  caption?: boolean;
+}
+
+const { col = 1, title, caption = false } = Astro.props;
+---
+
+<div class={`col-start-1 col-end-13 text-white grid-gap ${col === 2 ? 'md:columns-2 md:col-start-5 md:col-end-13' : 'md:col-start-5 md:col-end-13 lg:col-end-12'}`}>
+  {title && (
+    <h2 class="mt-8 mb-2 body-text">
+      {title}
+    </h2>
+  )}
+  <div class={`${caption ? 'opacity-60 caption-text uppercase' : 'body-text'}`}>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .body-text {
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .body-text {
+      font-size: 15px;
+    }
+  }
+
+  .caption-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    line-height: 160%;
+    letter-spacing: 0.08em;
+  }
+
+  .grid-gap {
+    gap: 12px;
+  }
+</style>
+

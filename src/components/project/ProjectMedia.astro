@@ -1,0 +1,96 @@
+---
+interface Props {
+  src: string;
+  isVideo?: boolean;
+  large?: boolean;
+  pAll?: boolean;
+  pt?: boolean;
+  pr?: boolean;
+  pb?: boolean;
+  pl?: boolean;
+  dark?: boolean;
+  bg?: string;
+  noShadow?: boolean;
+}
+
+const { 
+  src, 
+  isVideo = false, 
+  large = false,
+  pAll = false,
+  pt = false,
+  pr = false,
+  pb = false,
+  pl = false,
+  dark = false,
+  bg = '',
+  noShadow = false
+} = Astro.props;
+
+const colClass = large ? 'col-start-1 col-end-13 md:col-start-1' : 'col-start-1 col-end-13 md:col-start-5';
+
+let paddingClass = '';
+let hasPadding = false;
+
+if (pAll) {
+  paddingClass = 'p-4 md:p-10';
+  hasPadding = true;
+} else {
+  if (pt) { paddingClass += ' pt-4 md:pt-10'; hasPadding = true; }
+  if (pr) { paddingClass += ' pr-4 md:pr-10'; hasPadding = true; }
+  if (pb) { paddingClass += ' pb-4 md:pb-10'; hasPadding = true; }
+  if (pl) { paddingClass += ' pl-4 md:pl-10'; hasPadding = true; }
+}
+
+// Determinar border radius según padding
+let roundedClass = '';
+if (pAll) {
+  roundedClass = 'rounded md:rounded-md';
+} else if (pt && pl) {
+  roundedClass = 'rounded-tl md:rounded-tl-lg';
+} else if (pt && pr) {
+  roundedClass = 'rounded-tr md:rounded-tr-lg';
+} else if (pb && pl) {
+  roundedClass = 'rounded-bl md:rounded-bl-lg';
+} else if (pb && pr) {
+  roundedClass = 'rounded-br-md md:rounded-br-lg';
+}
+
+---
+
+<div class={`${colClass} block overflow-hidden transition duration-300 mb-3`}>
+  <article class={`z-10 w-full h-auto transition duration-500 ease-out text-[0px]`}>
+    {isVideo ? (
+      <video 
+        src={src}
+        class="w-full h-auto object-cover"
+        autoplay
+        loop
+        muted
+        playsinline
+      />
+    ) : (
+      <img 
+        src={src}
+        alt="Project media"
+        class="w-full h-auto object-cover"
+      />
+    )}
+  </article>
+  
+  {Astro.slots.has('default') && (
+    <div class="opacity-60 caption-text col-start-1 col-end-13 mb-0 mt-3 uppercase">
+      <slot />
+    </div>
+  )}
+</div>
+
+<style>
+  .caption-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    line-height: 160%;
+    letter-spacing: 0.08em;
+  }
+</style>
+

@@ -8,7 +8,9 @@ export default {
         muted: '#71717a',
         'yellow-300': '#FDE047',
         'zinc-100': '#f4f4f5',
+        'zinc-500': '#71717a',
         'zinc-600': '#52525b',
+        'neutral-800': '#262626',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

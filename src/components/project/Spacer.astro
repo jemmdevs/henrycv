@@ -1,0 +1,16 @@
+---
+interface Props {
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { size = 'medium' } = Astro.props;
+
+const sizeMap = {
+  small: 'h-8',
+  medium: 'h-16',
+  large: 'h-24'
+};
+---
+
+<div class={`m-0 col-start-1 col-span-full ${sizeMap[size]}`}></div>
+

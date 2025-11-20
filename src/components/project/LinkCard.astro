@@ -1,0 +1,36 @@
+---
+interface Props {
+  col: number;
+  href: string;
+}
+
+const { col, href } = Astro.props;
+const colClass = col === 1 ? 'col-span-full md:col-start-5 md:col-end-9' : 'col-span-full md:col-start-9 md:col-end-13';
+---
+
+<a 
+  href={href} 
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`${colClass} flex items-center flex-row p-4 bg-white/[.05] hover:bg-white/10 rounded-md caption-text text-white/80 hover:text-white select-none group transition-all duration-300 uppercase`}
+>
+  <span><slot /></span>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    fill="none" 
+    viewBox="0 0 24 24" 
+    class="h-3 w-3 ml-auto stroke-[3px] stroke-white/30 group-hover:stroke-white"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+  </svg>
+</a>
+
+<style>
+  .caption-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    line-height: 160%;
+    letter-spacing: 0.08em;
+  }
+</style>
+

@@ -1,0 +1,11 @@
+---
+interface Props {
+  full?: boolean;
+}
+
+const { full = false } = Astro.props;
+const colClass = full ? 'col-start-1' : 'md:col-start-5';
+---
+
+<hr class={`col-end-13 ${colClass} border-t border-white/[.15] mt-[2px] mb-0`} />
+
