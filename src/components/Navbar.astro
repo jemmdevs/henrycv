@@ -12,14 +12,20 @@ const { showClose = false } = Astro.props;
       <!-- J. Enrique Mateo: columnas 1-4 (33%) - siempre visible -->
       <div class="col-span-4">
         <!-- Mobile: solo "J. Enrique" -->
-        <a href="/" class="name-link font-medium md:hidden navbar-text">Enrique Mateo</a>
+        <a href="/" class="name-link font-medium md:hidden navbar-text"
+          >José Enrique</a
+        >
         <!-- Desktop: nombre completo "J. Enrique Mateo" -->
-        <a href="/" class="name-link font-medium hidden md:inline navbar-text">Enrique Mateo</a>
+        <a href="/" class="name-link font-medium hidden md:inline navbar-text"
+          >José Enrique</a
+        >
       </div>
-      
+
       <!-- Mobile: Interaction Designer ocupa 6 columnas (50%) -->
       <!-- Desktop: Interaction Designer + Seville, SE con subgrid -->
-      <div class={`col-start-5 md:col-start-7 ${showClose ? 'col-span-7 md:col-span-5' : 'col-span-8 md:col-span-6'}`}>
+      <div
+        class={`col-start-5 md:col-start-7 ${showClose ? "col-span-7 md:col-span-5" : "col-span-8 md:col-span-6"}`}
+      >
         <div class="grid grid-cols-6 gap-3">
           <!-- Interaction Designer: 
                Mobile: 6 columnas completas
@@ -30,22 +36,35 @@ const { showClose = false } = Astro.props;
           <!-- Seville, SE: 
                Mobile: OCULTO
                Desktop: col-start-3, 4 columnas (alineado con DESCRIPTION) -->
-          <div class={`md:col-span-4 md:col-start-3 ${showClose ? 'hidden' : 'hidden md:block'}`}>
+          <div
+            class={`md:col-span-4 md:col-start-3 ${showClose ? "hidden" : "hidden md:block"}`}
+          >
             <div class="font-medium navbar-text">Seville, SE</div>
           </div>
         </div>
       </div>
 
       <!-- X para cerrar (solo en páginas de proyecto) -->
-      {showClose && (
-        <div class="col-span-1 col-start-12 flex items-center justify-end">
-          <a href="/" class="close-link">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-              <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
-            </svg>
-          </a>
-        </div>
-      )}
+      {
+        showClose && (
+          <div class="col-span-1 col-start-12 flex items-center justify-end">
+            <a href="/" class="close-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          </div>
+        )
+      }
     </div>
   </div>
   <!-- Línea divisoria con margen - color más oscuro y discreto -->
@@ -93,4 +112,3 @@ const { showClose = false } = Astro.props;
     transition: color 0.2s ease;
   }
 </style>
-
