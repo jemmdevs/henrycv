@@ -1,4 +1,6 @@
 ---
+import SmoothScroll from "../components/SmoothScroll.astro";
+
 interface Props {
   title: string;
 }
@@ -24,6 +26,7 @@ const { title } = Astro.props;
   </head>
   <body class="bg-background text-white antialiased">
     <slot />
+    <SmoothScroll />
   </body>
 </html>
 
@@ -40,6 +43,24 @@ const { title } = Astro.props;
     font-size: 15px;
     line-height: 21px;
     color: rgb(255, 255, 255);
+  }
+
+  /* Lenis Smooth Scroll Styles */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 
   /* Texto seleccionado - solo las letras en amarillo, fondo transparente */

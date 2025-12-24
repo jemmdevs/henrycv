@@ -1,0 +1,22 @@
+---
+// Componente para Lenis Smooth Scroll
+// Se coloca justo antes del cierre del </body> en el Layout
+---
+
+<script>
+    import Lenis from "lenis";
+
+    // Inicializar Lenis con configuración suave
+    const lenis = new Lenis({
+        lerp: 0.1, // Factor de interpolación para suavidad
+        wheelMultiplier: 1, // Multiplicador para el scroll con rueda
+    });
+
+    // Bucle de animación sincronizado con requestAnimationFrame
+    function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+</script>
