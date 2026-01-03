@@ -1,22 +1,89 @@
 ---
-// Componente para Lenis Smooth Scroll
+// Componente para Lenis Smooth Scroll - Optimizado para máximo rendimiento
 // Se coloca justo antes del cierre del </body> en el Layout
 ---
 
 <script>
     import Lenis from "lenis";
 
-    // Inicializar Lenis con configuración suave
-    const lenis = new Lenis({
-        lerp: 0.1, // Factor de interpolación para suavidad
-        wheelMultiplier: 1, // Multiplicador para el scroll con rueda
-    });
+    let lenis: Lenis | null = null;
+    let rafId: number | null = null;
 
-    // Bucle de animación sincronizado con requestAnimationFrame
-    function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+    // Configuración optimizada de Lenis
+    function initLenis() {
+        // Destruir instancia anterior si existe
+        if (lenis) {
+            lenis.destroy();
+            lenis = null;
+        }
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+
+        lenis = new Lenis({
+            lerp: 0.075, // Lerp más suave para animación premium (0.05-0.1 óptimo)
+            wheelMultiplier: 0.8, // Multiplicador reducido para scroll más controlado
+            touchMultiplier: 1.5, // Mejor respuesta táctil en móviles
+            infinite: false, // Desactivar scroll infinito
+            orientation: "vertical", // Optimizar solo para vertical
+            gestureOrientation: "vertical",
+            smoothWheel: true, // Activar suavizado de rueda
+            syncTouch: false, // No sincronizar touch (mejor rendimiento en móviles)
+            syncTouchLerp: 0.075, // Lerp para touch si se activa
+        });
+
+        // RAF optimizado con tiempo de alta resolución
+        function raf(time: number) {
+            lenis?.raf(time);
+            rafId = requestAnimationFrame(raf);
+        }
+
+        rafId = requestAnimationFrame(raf);
+
+        // Exponer lenis globalmente para debugging y sincronización con otras librerías
+        (window as any).lenis = lenis;
     }
 
-    requestAnimationFrame(raf);
+    // Inicializar inmediatamente
+    initLenis();
+
+    // Soporte para Astro View Transitions - reiniciar Lenis después de navegación
+    document.addEventListener("astro:page-load", () => {
+        initLenis();
+    });
+
+    // Limpiar al cambiar de página (antes de la transición)
+    document.addEventListener("astro:before-preparation", () => {
+        if (lenis) {
+            lenis.destroy();
+            lenis = null;
+        }
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+    });
+
+    // Pausar Lenis cuando la pestaña no está visible (ahorro de recursos)
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            lenis?.stop();
+        } else {
+            lenis?.start();
+        }
+    });
+
+    // Manejar resize con debounce para mejor rendimiento
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener(
+        "resize",
+        () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                lenis?.resize();
+            }, 150);
+        },
+        { passive: true },
+    );
 </script>

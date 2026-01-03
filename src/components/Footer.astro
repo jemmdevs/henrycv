@@ -3,7 +3,7 @@
 ---
 
 <footer
-  class="sticky bottom-0 z-[1] dot-grid"
+  class="footer sticky bottom-0 z-[1] dot-grid"
   style="background-color: #1C1C1C;"
 >
   <div
@@ -30,12 +30,16 @@
     </div>
 
     <!-- Social Links - Columnas 7-8 -->
-    <div class="col-span-12 md:col-start-7 md:col-span-2">
+    <nav
+      class="col-span-12 md:col-start-7 md:col-span-2"
+      aria-label="Social links"
+    >
       <span class="flex flex-col space-y-1">
         <p>
           <a
             href="https://www.linkedin.com/in/jose-enrique-mateo-munoz-102b28374/"
             target="_blank"
+            rel="noopener noreferrer"
             class="footer-link"
           >
             Linkedin<sup class="superscript">2</sup>
@@ -45,18 +49,24 @@
           <a
             href="https://www.instagram.com/joseenrique_mm/"
             target="_blank"
+            rel="noopener noreferrer"
             class="footer-link"
           >
             Instagram<sup class="superscript">3</sup>
           </a>
         </p>
         <p>
-          <a href="https://twitter.com" target="_blank" class="footer-link">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-link"
+          >
             Twitter<sup class="superscript">4</sup>
           </a>
         </p>
       </span>
-    </div>
+    </nav>
 
     <!-- Email CTA - Columnas 9-12 -->
     <div class="col-span-12 md:col-start-9 md:col-span-4">
@@ -75,6 +85,13 @@
 </footer>
 
 <style>
+  /* Footer optimizado con GPU acceleration */
+  .footer {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    contain: layout style;
+  }
+
   .dot-grid {
     background-image: radial-gradient(
       rgba(255, 255, 255, 0.03) 1px,
@@ -82,6 +99,8 @@
     );
     background-size: 20px 20px;
     background-position: -19px -19px;
+    /* Renderizar patrón en GPU */
+    will-change: transform;
   }
 
   .footer-link {
@@ -91,7 +110,14 @@
     font-weight: 500;
     padding: 2px 2px;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
-    transition: all 0.2s ease;
+    /* Transiciones optimizadas con variables CSS */
+    transition:
+      background-color var(--duration-fast, 150ms)
+        var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)),
+      color var(--duration-fast, 150ms)
+        var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)),
+      border-bottom-color var(--duration-fast, 150ms)
+        var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
   }
 
   .footer-link:hover {
@@ -107,5 +133,16 @@
     line-height: 0;
     color: #fde047;
     margin-left: 2px;
+  }
+
+  /* Reducir movimiento si el usuario lo prefiere */
+  @media (prefers-reduced-motion: reduce) {
+    .footer-link {
+      transition: none;
+    }
+
+    .dot-grid {
+      will-change: auto;
+    }
   }
 </style>

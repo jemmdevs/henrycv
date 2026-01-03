@@ -6,7 +6,7 @@ interface Props {
 const { showClose = false } = Astro.props;
 ---
 
-<nav class="fixed top-0 left-0 right-0 bg-background z-[300]">
+<nav class="navbar fixed top-0 left-0 right-0 bg-background z-[300]">
   <div class="px-3 py-4">
     <div class="grid grid-cols-12 gap-3 items-center">
       <!-- J. Enrique Mateo: columnas 1-4 (33%) - siempre visible -->
@@ -50,12 +50,17 @@ const { showClose = false } = Astro.props;
       {
         showClose && (
           <div class="col-span-1 col-start-12 flex items-center justify-end">
-            <a href="/" class="close-link">
+            <a
+              href="/"
+              class="close-link"
+              aria-label="Close and return to home"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 class="w-6 h-6"
+                aria-hidden="true"
               >
                 <path
                   fill-rule="evenodd"
@@ -76,6 +81,15 @@ const { showClose = false } = Astro.props;
 </nav>
 
 <style>
+  /* Navbar container optimizado */
+  .navbar {
+    /* Usar transform3d para GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    /* Contain para optimizar repaint */
+    contain: layout style;
+  }
+
   .navbar-text {
     font-size: 14px;
     line-height: 20px;
@@ -90,8 +104,10 @@ const { showClose = false } = Astro.props;
 
   .name-link {
     cursor: pointer;
-    transition: color 0.2s ease;
     text-decoration: none;
+    /* Transición optimizada con variables CSS */
+    transition: color var(--duration-fast, 150ms)
+      var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
   }
 
   .name-link:hover {
@@ -100,17 +116,36 @@ const { showClose = false } = Astro.props;
 
   .close-link {
     cursor: pointer;
-    transition: color 0.2s ease;
     text-decoration: none;
     display: flex;
     align-items: center;
+    /* Transición optimizada */
+    transition:
+      color var(--duration-fast, 150ms)
+        var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)),
+      transform var(--duration-fast, 150ms)
+        var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
   }
 
   .close-link:hover {
     color: #fde047;
+    transform: scale(1.1);
   }
 
   .close-link svg {
-    transition: color 0.2s ease;
+    /* GPU acceleration para el SVG */
+    transform: translateZ(0);
+  }
+
+  /* Reducir movimiento si el usuario lo prefiere */
+  @media (prefers-reduced-motion: reduce) {
+    .name-link,
+    .close-link {
+      transition: none;
+    }
+
+    .close-link:hover {
+      transform: none;
+    }
   }
 </style>
