@@ -1,0 +1,73 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import ProjectHero from "../../components/project/ProjectHero.astro";
+import ProjectTitle from "../../components/project/ProjectTitle.astro";
+import ProjectBody from "../../components/project/ProjectBody.astro";
+import ProjectDetails from "../../components/project/ProjectDetails.astro";
+import LinkCard from "../../components/project/LinkCard.astro";
+import ProjectMedia from "../../components/project/ProjectMedia.astro";
+import Divider from "../../components/project/Divider.astro";
+import Spacer from "../../components/project/Spacer.astro";
+---
+
+<Layout title="Alawal - José Enrique">
+    <!-- Contenido Principal - z-index ALTO + background sólido -->
+    <div class="relative z-[200] bg-background">
+        <div class="bg-background pb-8">
+            <Navbar showClose={true} />
+            <div style="padding-top: 53px;">
+                <!-- Main Container -->
+                <main class="min-h-[70vh]">
+                    <!-- Grid Container -->
+                    <div class="px-3 pt-0 pb-6 max-w-[1800px] mx-auto">
+                        <div class="grid grid-cols-12 gap-3">
+                            <!-- Hero -->
+                            <ProjectHero content="/images/alawalDetail.avif" />
+
+                            <!-- Título sticky (izquierda) -->
+                            <ProjectTitle role="DIGITAL TOOLMAKING">
+                                Alawal
+                            </ProjectTitle>
+
+                            <!-- Descripción (derecha) -->
+                            <ProjectBody col={2}>
+                                <p>
+                                    Alawal is a project strictly focused on...
+                                    (Content to be populated).
+                                </p>
+                            </ProjectBody>
+
+                            <!-- Detalles -->
+                            <ProjectDetails
+                                role="Product Design"
+                                collaborators="Team"
+                                duration="2025"
+                                tools="Figma, Astro"
+                            />
+
+                            <!-- Links -->
+                            <LinkCard col={1} href="#"> alawal.com </LinkCard>
+
+                            <!-- Divisor -->
+                            <Divider />
+
+                            <!-- Sección 1 -->
+                            <ProjectBody title="Overview" col={1}>
+                                Description of the project.
+                            </ProjectBody>
+
+                            <ProjectMedia src="/images/alawalDetail.avif">
+                                Project placeholder image
+                            </ProjectMedia>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <Footer />
+</Layout>
