@@ -2,9 +2,10 @@
 interface Props {
   content: string;
   isVideo?: boolean;
+  objectFit?: "cover" | "contain";
 }
 
-const { content, isVideo = false } = Astro.props;
+const { content, isVideo = false, objectFit = "cover" } = Astro.props;
 ---
 
 <div
@@ -14,7 +15,7 @@ const { content, isVideo = false } = Astro.props;
     isVideo ? (
       <video
         src={content}
-        class="w-full h-full object-cover"
+        class={`w-full h-full object-${objectFit}`}
         autoplay
         loop
         muted
@@ -24,7 +25,7 @@ const { content, isVideo = false } = Astro.props;
       <img
         src={content}
         alt="Project hero"
-        class="w-full h-full object-cover"
+        class={`w-full h-full object-${objectFit}`}
       />
     )
   }
