@@ -9,6 +9,11 @@
     let lenis: Lenis | null = null;
     let rafId: number | null = null;
 
+    // Detectar si es un dispositivo móvil
+    function isMobile(): boolean {
+        return window.matchMedia("(max-width: 768px)").matches;
+    }
+
     // Configuración optimizada de Lenis
     function initLenis() {
         // Destruir instancia anterior si existe
@@ -21,8 +26,13 @@
             rafId = null;
         }
 
+        // Solo inicializar Lenis en desktop (mejor rendimiento en móvil con scroll nativo)
+        if (isMobile()) {
+            return;
+        }
+
         lenis = new Lenis({
-            lerp: 0.075, // Lerp más suave para animación premium (0.05-0.1 óptimo)
+            lerp: 0.1, // Lerp optimizado para mejor sincronización visual
             wheelMultiplier: 0.8, // Multiplicador reducido para scroll más controlado
             touchMultiplier: 1.5, // Mejor respuesta táctil en móviles
             infinite: false, // Desactivar scroll infinito
@@ -30,7 +40,7 @@
             gestureOrientation: "vertical",
             smoothWheel: true, // Activar suavizado de rueda
             syncTouch: false, // No sincronizar touch (mejor rendimiento en móviles)
-            syncTouchLerp: 0.075, // Lerp para touch si se activa
+            syncTouchLerp: 0.1, // Lerp para touch sincronizado con el principal
         });
 
         // RAF optimizado con tiempo de alta resolución
@@ -66,22 +76,36 @@
     });
 
     // Pausar Lenis cuando la pestaña no está visible (ahorro de recursos)
+    // Solo en desktop donde Lenis está activo
     document.addEventListener("visibilitychange", () => {
+        if (!lenis) return;
+
         if (document.hidden) {
-            lenis?.stop();
+            lenis.stop();
         } else {
-            lenis?.start();
+            lenis.start();
         }
     });
 
     // Manejar resize con debounce para mejor rendimiento
     let resizeTimeout: ReturnType<typeof setTimeout>;
+    let wasMobile = isMobile();
+
     window.addEventListener(
         "resize",
         () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                lenis?.resize();
+                const nowMobile = isMobile();
+
+                // Si cambió de móvil a desktop o viceversa, reiniciar Lenis
+                if (wasMobile !== nowMobile) {
+                    wasMobile = nowMobile;
+                    initLenis();
+                } else {
+                    // Solo resize si sigue siendo desktop
+                    lenis?.resize();
+                }
             }, 150);
         },
         { passive: true },
