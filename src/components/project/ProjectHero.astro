@@ -18,13 +18,13 @@ const overflowClass = objectFit === "cover" ? "overflow-hidden" : "";
 ---
 
 <div
-  class={`col-span-12 h-[40vw] md:h-[50vw] mb-2 md:mb-6 ${overflowClass} relative select-none ${className}`}
+  class={`col-span-12 h-auto md:h-[50vw] mb-2 md:mb-6 ${overflowClass} relative select-none ${className}`}
 >
   {
     isVideo ? (
       <video
         src={content}
-        class={`w-full h-full object-${objectFit}`}
+        class={`w-full md:h-full object-${objectFit}`}
         style={objectFit === "contain" ? "object-position: top;" : ""}
         autoplay
         loop
@@ -35,7 +35,7 @@ const overflowClass = objectFit === "cover" ? "overflow-hidden" : "";
       <img
         src={content}
         alt="Project hero"
-        class={`w-full h-full object-${objectFit}`}
+        class={`w-full md:h-full object-${objectFit}`}
         style={objectFit === "contain" ? "object-position: top;" : ""}
       />
     )
