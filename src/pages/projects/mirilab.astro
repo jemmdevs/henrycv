@@ -17,14 +17,19 @@ import Spacer from "../../components/project/Spacer.astro";
     <div class="relative z-[200] bg-background">
         <div class="bg-background pb-8">
             <Navbar showClose={true} />
-            <div style="padding-top: 20px;">
+            <div style="padding-top: 13px;">
                 <!-- Main Container -->
                 <main class="min-h-[70vh]">
                     <!-- Grid Container -->
                     <div class="px-3 pt-0 pb-6 max-w-[1800px] mx-auto">
                         <div class="grid grid-cols-12 gap-3">
                             <!-- Hero -->
-                            <ProjectHero content="/images/mirilabDetail.avif" objectFit="contain" />
+                            <!-- Hero -->
+                            <ProjectHero
+                                content="/images/mirilabDetail.avif"
+                                objectFit="contain"
+                                className="mt-10"
+                            />
 
                             <!-- Título sticky (izquierda) -->
                             <ProjectTitle role="DIGITAL TOOLMAKING">
@@ -58,7 +63,10 @@ import Spacer from "../../components/project/Spacer.astro";
                                 Description of the project.
                             </ProjectBody>
 
-                            <ProjectMedia src="/images/mirilabDetail.avif">
+                            <ProjectMedia
+                                src="/images/mirilabDetail.avif"
+                                objectFit="contain"
+                            >
                                 Project placeholder image
                             </ProjectMedia>
                         </div>

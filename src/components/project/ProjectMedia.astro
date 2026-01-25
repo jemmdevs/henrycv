@@ -13,6 +13,7 @@ interface Props {
   noShadow?: boolean;
   poster?: string;
   alt?: string;
+  objectFit?: "cover" | "contain";
 }
 
 const {
@@ -29,6 +30,7 @@ const {
   noShadow = false,
   poster = "",
   alt = "Project media",
+  objectFit = "cover",
 } = Astro.props;
 
 const colClass = large
@@ -84,7 +86,7 @@ if (pAll) {
         <video
           src={src}
           poster={poster}
-          class="w-full h-auto object-cover media-element"
+          class={`w-full h-auto object-${objectFit} media-element`}
           autoplay
           loop
           muted
@@ -95,7 +97,7 @@ if (pAll) {
         <img
           src={src}
           alt={alt}
-          class="w-full h-auto object-cover media-element"
+          class={`w-full h-auto object-${objectFit} media-element`}
           loading="lazy"
           decoding="async"
         />

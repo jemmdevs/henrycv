@@ -3,19 +3,29 @@ interface Props {
   content: string;
   isVideo?: boolean;
   objectFit?: "cover" | "contain";
+  className?: string; // Permitir clases personalizadas (ej: padding para ajustes de contain)
 }
 
-const { content, isVideo = false, objectFit = "cover" } = Astro.props;
+const {
+  content,
+  isVideo = false,
+  objectFit = "cover",
+  className = "",
+} = Astro.props;
+
+// Solo aplicar overflow-hidden con cover, no con contain
+const overflowClass = objectFit === "cover" ? "overflow-hidden" : "";
 ---
 
 <div
-  class="col-span-12 h-[60vw] md:h-[50vw] mb-2 md:mb-6 overflow-hidden relative select-none"
+  class={`col-span-12 h-[60vw] md:h-[50vw] mb-2 md:mb-6 ${overflowClass} relative select-none ${className}`}
 >
   {
     isVideo ? (
       <video
         src={content}
         class={`w-full h-full object-${objectFit}`}
+        style={objectFit === "contain" ? "object-position: top;" : ""}
         autoplay
         loop
         muted
@@ -26,6 +36,7 @@ const { content, isVideo = false, objectFit = "cover" } = Astro.props;
         src={content}
         alt="Project hero"
         class={`w-full h-full object-${objectFit}`}
+        style={objectFit === "contain" ? "object-position: top;" : ""}
       />
     )
   }
