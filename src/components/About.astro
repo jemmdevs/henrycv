@@ -1,30 +1,23 @@
 ---
 const experiences = [
   {
-    team: "Notion",
+    team: "Tousys",
     period: "2025 - Present",
-    description: "Notion Calendar, AI Meeting Notes, and much more"
+    description:
+      "Leading design and development for genomic optimization platforms serving laboratories and pharmaceutical research. Driving research and development for new software products.",
   },
   {
-    team: "Azuki",
-    period: "2023 - 2025",
-    description: "First full-time design hire. Scaled design team to 5 people. Built Anime.com, Animee, and interactive experiences for the Azuki IP"
+    team: "General Dynamics",
+    period: "2024 - 2025",
+    description:
+      "Full Stack Engineer responsible for mission-critical interfaces, servers, and database architecture. Orchestrated the migration from React 14 to React 19, focusing on making complex systems feel simple and intuitive.",
   },
   {
-    team: "Independent Practice",
+    team: "Independent Research",
     period: "",
-    description: "Design consulting for emerging AI and productivity companies. Notable clients include Cursor, Rox, Endex, and Paraform."
+    description:
+      "Analyzing and refining interaction models of industry leaders like MetaLab and Fiddle. Identified friction points and proposed architectural optimizations to enhance user flow and technical performance.",
   },
-  {
-    team: "Skiff",
-    period: "2022 - 2023",
-    description: "First full-time design hire. 0→1 design for Email, Editor, Drive, Calendar. Scaled Skiff Mail to 1M+ users. Recently acquired by Notion."
-  },
-  {
-    team: "Apple",
-    period: "2020 - 2021",
-    description: "Two summers at Apple working on conversational AI interfaces for Siri in the AI/ML Organization. Explored multimodal patterns and new behaviors empowered by natural language input."
-  }
 ];
 ---
 
@@ -34,9 +27,22 @@ const experiences = [
          Mobile: 12 columnas (100%, stack arriba)
          Desktop: columnas 1-5 (≈42%, lado izquierdo) -->
     <div class="col-span-12 md:col-span-5">
-      <h2 class="uppercase mb-3" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">ABOUT</h2>
+      <h2
+        class="uppercase mb-3"
+        style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;"
+      >
+        ABOUT
+      </h2>
       <p class="font-medium about-text">
-        I design software with the belief it's one of the most malleable mediums we have. At the moment, I'm interested in how tools connect with each other, how they act on our behalf, and how we interact with them across different modes. I studied Communication Design and Human-Computer Interaction at Carnegie Mellon University, an experience I hold fondly and will cherish for the rest of my life. If you have an interesting idea, get in touch.
+        I design and develop software with the belief that it is one of the most
+        malleable mediums we have. I see myself as an intermediary between
+        people and machines, focusing on how we interact with tools and shaping
+        the interfaces that guide those interactions. Lately, I am fascinated by
+        how different systems connect with each other and how technology can act
+        on our behalf to make the complex feel simple. I currently lead the
+        design and development of interfaces at Tousys, an engineering firm
+        specializing in genomic sequence optimization and general Research and
+        Development. If you have an interesting idea, get in touch.
       </p>
     </div>
 
@@ -46,25 +52,37 @@ const experiences = [
     <div class="col-span-12 md:col-span-6 md:col-start-7 mt-6 md:mt-0">
       <!-- Headers: subgrid de 6 columnas (Team 33% + Description 67%) -->
       <div class="grid grid-cols-6 gap-3 mb-3">
-        <h2 class="col-span-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">TEAM</h2>
-        <h2 class="col-span-4 col-start-3 uppercase" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;">DESCRIPTION</h2>
+        <h2
+          class="col-span-2 uppercase"
+          style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;"
+        >
+          TEAM
+        </h2>
+        <h2
+          class="col-span-4 col-start-3 uppercase"
+          style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;"
+        >
+          DESCRIPTION
+        </h2>
       </div>
 
       <!-- Experiences -->
       <div class="space-y-3">
-        {experiences.map((exp) => (
-          <div class="grid grid-cols-6 gap-3">
-            <div class="col-span-2">
-              <h3 class="font-medium mb-1 body-text">{exp.team}</h3>
-              {exp.period && (
-                <p class="font-medium text-white body-text">{exp.period}</p>
-              )}
+        {
+          experiences.map((exp) => (
+            <div class="grid grid-cols-6 gap-3">
+              <div class="col-span-2">
+                <h3 class="font-medium mb-1 body-text">{exp.team}</h3>
+                {exp.period && (
+                  <p class="font-medium text-white body-text">{exp.period}</p>
+                )}
+              </div>
+              <div class="col-span-4 col-start-3">
+                <p class="font-medium body-text">{exp.description}</p>
+              </div>
             </div>
-            <div class="col-span-4 col-start-3">
-              <p class="font-medium body-text">{exp.description}</p>
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>
@@ -87,4 +105,3 @@ const experiences = [
     }
   }
 </style>
-
