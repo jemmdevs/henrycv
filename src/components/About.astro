@@ -10,6 +10,7 @@ const experiences = [
   },
   {
     team: "General Dynamics",
+    teamShort: "GDELS",
     period: "2024 - 2025",
     description:
       "Full Stack Engineer for mission-critical systems and architecture. Orchestrated the React 14 to 19 migration, making complex workflows feel intuitive.",
@@ -93,15 +94,27 @@ const experiences = [
                       href={exp.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-link"
+                      class="group"
                     >
-                      {exp.team}
+                      <span class="text-link">
+                        {exp.teamShort && (
+                          <span class="md:hidden">{exp.teamShort}</span>
+                        )}
+                        <span class={exp.teamShort ? "hidden md:inline" : ""}>
+                          {exp.team}
+                        </span>
+                      </span>
+                      {exp.footnote && (
+                        <sup class="superscript">{exp.footnote}</sup>
+                      )}
                     </a>
                   ) : (
-                    exp.team
-                  )}
-                  {exp.footnote && (
-                    <sup class="superscript">{exp.footnote}</sup>
+                    <>
+                      {exp.team}
+                      {exp.footnote && (
+                        <sup class="superscript">{exp.footnote}</sup>
+                      )}
+                    </>
                   )}
                 </h3>
                 {exp.period && (
@@ -131,7 +144,7 @@ const experiences = [
   .text-link {
     cursor: pointer;
     font-weight: 500;
-    padding: 0 2px;
+    padding: 0;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
     transition:
       background-color 150ms cubic-bezier(0.25, 1, 0.5, 1),

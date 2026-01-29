@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Blog - José Enrique">
+    <!-- Contenido Principal - z-index ALTO + background sólido -->
+    <div class="relative z-[200] bg-background">
+        <div class="bg-background pb-8">
+            <Navbar />
+            <div style="padding-top: 58px;">
+                <!-- Blog content will go here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer - STICKY + z-index BAJO -->
+    <Footer />
+</Layout>
