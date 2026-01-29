@@ -14,6 +14,8 @@ interface Props {
 
 const { frontmatter } = Astro.props;
 
+const shareUrl = new URL(Astro.url.pathname, Astro.site || "https://josencv.vercel.app").toString();
+
 const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
         year: "numeric",
@@ -71,7 +73,7 @@ const formatDate = (date: Date) => {
                             <div class="share-dropdown hidden">
                                 <!-- LinkedIn -->
                                 <a
-                                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`}
+                                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="share-option"
@@ -90,7 +92,7 @@ const formatDate = (date: Date) => {
 
                                 <!-- X (Twitter) -->
                                 <a
-                                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(frontmatter.title)}`}
+                                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(frontmatter.title)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="share-option"
@@ -128,7 +130,7 @@ const formatDate = (date: Date) => {
 
                                 <!-- Email -->
                                 <a
-                                    href={`mailto:?subject=${encodeURIComponent(frontmatter.title)}&body=${encodeURIComponent(Astro.url.href)}`}
+                                    href={`mailto:?subject=${encodeURIComponent(frontmatter.title)}&body=${encodeURIComponent(shareUrl)}`}
                                     class="share-option"
                                 >
                                     <svg
@@ -150,7 +152,7 @@ const formatDate = (date: Date) => {
                                 <!-- Copy Link -->
                                 <button
                                     class="share-option copy-link-btn"
-                                    data-url={Astro.url.href}
+                                    data-url={shareUrl}
                                 >
                                     <svg
                                         class="w-4 h-4"

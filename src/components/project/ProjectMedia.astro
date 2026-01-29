@@ -62,7 +62,6 @@ if (pAll) {
   }
 }
 
-// Determinar border radius según padding
 let roundedClass = "";
 if (pAll) {
   roundedClass = "rounded md:rounded-md";
@@ -77,7 +76,9 @@ if (pAll) {
 }
 ---
 
-<div class={`${colClass} block overflow-hidden transition duration-300 mb-3`}>
+<div
+  class={`${colClass} block overflow-hidden transition duration-300 mb-3`}
+>
   <article
     class="media-container z-10 w-full h-auto transition duration-500 ease-out text-[0px]"
   >
@@ -122,47 +123,26 @@ if (pAll) {
     letter-spacing: 0.08em;
   }
 
-  /* Optimización de media elements */
   .media-element {
     background-color: #1a1a1a;
-    /* GPU acceleration */
     transform: translateZ(0);
     backface-visibility: hidden;
   }
 
   .media-container {
-    /* Contener el layout para mejor rendimiento */
     contain: layout style;
   }
 </style>
 
 <script>
-  // Intersection Observer para pausar videos fuera del viewport
-  const mediaObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target as HTMLVideoElement;
+  import {
+    observeAllVideos,
+    setupVideoObserverCleanup,
+  } from "../../utils/videoObserver";
 
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-    },
-    {
-      rootMargin: "100px 0px",
-      threshold: 0.1,
-    },
-  );
+  // Observe all media container videos
+  observeAllVideos(".media-container video");
 
-  // Observar videos en media containers
-  document.querySelectorAll(".media-container video").forEach((video) => {
-    mediaObserver.observe(video);
-  });
-
-  // Cleanup para View Transitions
-  document.addEventListener("astro:before-preparation", () => {
-    mediaObserver.disconnect();
-  });
+  // Setup cleanup for View Transitions
+  setupVideoObserverCleanup();
 </script>

@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://josencv.vercel.app',
   integrations: [
     tailwind({
       // Desactivar base styles si no se necesitan (pequeña optimización)

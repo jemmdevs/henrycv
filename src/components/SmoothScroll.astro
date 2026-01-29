@@ -1,113 +1,119 @@
 ---
-// Componente para Lenis Smooth Scroll - Optimizado para máximo rendimiento
-// Se coloca justo antes del cierre del </body> en el Layout
+// Lenis Smooth Scroll Component - Optimized for maximum performance
+// Place just before </body> in Layout
 ---
 
 <script>
-    import Lenis from "lenis";
+  import Lenis from "lenis";
+  import {
+    MOBILE_BREAKPOINT,
+    RESIZE_DEBOUNCE_MS,
+    LENIS_CONFIG,
+  } from "../utils/constants";
 
-    let lenis: Lenis | null = null;
-    let rafId: number | null = null;
+  let lenis: Lenis | null = null;
+  let rafId: number | null = null;
+  let isInitialized = false;
 
-    // Detectar si es un dispositivo móvil
-    function isMobile(): boolean {
-        return window.matchMedia("(max-width: 768px)").matches;
+  function isMobile(): boolean {
+    return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+  }
+
+  function cleanup(): void {
+    if (lenis) {
+      lenis.destroy();
+      lenis = null;
+      (window as any).lenis = null;
+    }
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    isInitialized = false;
+  }
+
+  function initLenis(): void {
+    // Cleanup previous instance
+    cleanup();
+
+    // Skip on mobile for native scroll performance
+    if (isMobile()) {
+      return;
     }
 
-    // Configuración optimizada de Lenis
-    function initLenis() {
-        // Destruir instancia anterior si existe
-        if (lenis) {
-            lenis.destroy();
-            lenis = null;
-        }
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-        }
-
-        // Solo inicializar Lenis en desktop (mejor rendimiento en móvil con scroll nativo)
-        if (isMobile()) {
-            return;
-        }
-
-        lenis = new Lenis({
-            lerp: 0.1, // Lerp optimizado para mejor sincronización visual
-            wheelMultiplier: 0.8, // Multiplicador reducido para scroll más controlado
-            touchMultiplier: 1.5, // Mejor respuesta táctil en móviles
-            infinite: false, // Desactivar scroll infinito
-            orientation: "vertical", // Optimizar solo para vertical
-            gestureOrientation: "vertical",
-            smoothWheel: true, // Activar suavizado de rueda
-            syncTouch: false, // No sincronizar touch (mejor rendimiento en móviles)
-            syncTouchLerp: 0.1, // Lerp para touch sincronizado con el principal
-        });
-
-        // RAF optimizado con tiempo de alta resolución
-        function raf(time: number) {
-            lenis?.raf(time);
-            rafId = requestAnimationFrame(raf);
-        }
-
-        rafId = requestAnimationFrame(raf);
-
-        // Exponer lenis globalmente para debugging y sincronización con otras librerías
-        (window as any).lenis = lenis;
+    // Check for reduced motion preference
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
     }
 
-    // Inicializar inmediatamente
-    initLenis();
-
-    // Soporte para Astro View Transitions - reiniciar Lenis después de navegación
-    document.addEventListener("astro:page-load", () => {
-        initLenis();
+    lenis = new Lenis({
+      lerp: LENIS_CONFIG.LERP,
+      wheelMultiplier: LENIS_CONFIG.WHEEL_MULTIPLIER,
+      touchMultiplier: LENIS_CONFIG.TOUCH_MULTIPLIER,
+      infinite: false,
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      syncTouch: false,
+      syncTouchLerp: LENIS_CONFIG.LERP,
     });
 
-    // Limpiar al cambiar de página (antes de la transición)
-    document.addEventListener("astro:before-preparation", () => {
-        if (lenis) {
-            lenis.destroy();
-            lenis = null;
+    function raf(time: number): void {
+      lenis?.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+
+    rafId = requestAnimationFrame(raf);
+    isInitialized = true;
+
+    // Expose globally for debugging
+    (window as any).lenis = lenis;
+  }
+
+  // Initial setup
+  initLenis();
+
+  // Astro View Transitions support
+  document.addEventListener("astro:page-load", () => {
+    // Only reinitialize if not already initialized
+    if (!isInitialized) {
+      initLenis();
+    }
+  });
+
+  // Cleanup before page transition
+  document.addEventListener("astro:before-preparation", cleanup);
+
+  // Pause when tab is not visible
+  document.addEventListener("visibilitychange", () => {
+    if (!lenis) return;
+
+    if (document.hidden) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  });
+
+  // Handle resize with debounce
+  let resizeTimeout: ReturnType<typeof setTimeout>;
+  let wasMobile = isMobile();
+
+  window.addEventListener(
+    "resize",
+    () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const nowMobile = isMobile();
+
+        if (wasMobile !== nowMobile) {
+          wasMobile = nowMobile;
+          initLenis();
+        } else if (lenis) {
+          lenis.resize();
         }
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-        }
-    });
-
-    // Pausar Lenis cuando la pestaña no está visible (ahorro de recursos)
-    // Solo en desktop donde Lenis está activo
-    document.addEventListener("visibilitychange", () => {
-        if (!lenis) return;
-
-        if (document.hidden) {
-            lenis.stop();
-        } else {
-            lenis.start();
-        }
-    });
-
-    // Manejar resize con debounce para mejor rendimiento
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    let wasMobile = isMobile();
-
-    window.addEventListener(
-        "resize",
-        () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                const nowMobile = isMobile();
-
-                // Si cambió de móvil a desktop o viceversa, reiniciar Lenis
-                if (wasMobile !== nowMobile) {
-                    wasMobile = nowMobile;
-                    initLenis();
-                } else {
-                    // Solo resize si sigue siendo desktop
-                    lenis?.resize();
-                }
-            }, 150);
-        },
-        { passive: true },
-    );
+      }, RESIZE_DEBOUNCE_MS);
+    },
+    { passive: true }
+  );
 </script>
