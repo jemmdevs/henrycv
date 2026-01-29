@@ -2,19 +2,113 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+type BlogPost = CollectionEntry<"blog">;
+
+const posts: BlogPost[] = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const formatDate = (date: Date): string => {
+    return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    });
+};
 ---
 
 <Layout title="Blog - José Enrique">
-    <!-- Contenido Principal - z-index ALTO + background sólido -->
+    <!-- Contenido Principal -->
     <div class="relative z-[200] bg-background">
-        <div class="bg-background pb-8">
-            <Navbar />
+        <div class="bg-background pb-16">
+            <Navbar showClose={true} />
             <div style="padding-top: 58px;">
-                <!-- Blog content will go here -->
+                <section class="mt-8 mb-6 md:mt-12 px-3">
+                    <div class="max-w-[800px] mx-auto">
+                        <!-- Header -->
+                        <h1
+                            class="uppercase mb-6"
+                            style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;"
+                        >
+                            BLOG
+                        </h1>
+
+                        <!-- Posts List -->
+                        <div class="space-y-10">
+                            {
+                                posts.map((post) => (
+                                    <article class="group">
+                                        <a
+                                            href={`/blog/${post.slug}`}
+                                            class="block"
+                                        >
+                                            <div class="flex flex-col md:flex-row md:items-baseline md:gap-4">
+                                                <p
+                                                    class="text-zinc-500 shrink-0 mb-1 md:mb-0"
+                                                    style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px;"
+                                                >
+                                                    {formatDate(
+                                                        post.data.pubDate,
+                                                    )}
+                                                </p>
+                                                <div class="flex-1">
+                                                    <h2
+                                                        class="font-medium text-white post-title"
+                                                        style="font-size: 19px; line-height: 26px;"
+                                                    >
+                                                        <span class="title-text">
+                                                            {post.data.title}
+                                                        </span>
+                                                    </h2>
+                                                    <p
+                                                        class="text-zinc-400 mt-1"
+                                                        style="font-size: 14px; line-height: 20px;"
+                                                    >
+                                                        {post.data.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </article>
+                                ))
+                            }
+                        </div>
+
+                        {
+                            posts.length === 0 && (
+                                <p
+                                    class="text-zinc-500"
+                                    style="font-size: 15px; line-height: 21px;"
+                                >
+                                    No posts yet. Check back soon!
+                                </p>
+                            )
+                        }
+                    </div>
+                </section>
             </div>
         </div>
     </div>
 
-    <!-- Footer - STICKY + z-index BAJO -->
+    <!-- Footer -->
     <Footer />
 </Layout>
+
+<style>
+    .post-title .title-text {
+        border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        transition:
+            background-color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+            color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+            border-bottom-color 150ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .group:hover .post-title .title-text {
+        background-color: rgba(253, 224, 71, 0.1);
+        color: #fde047;
+        border-bottom-color: #fde047;
+    }
+</style>

@@ -1,0 +1,648 @@
+---
+import Layout from "./Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+    frontmatter: {
+        title: string;
+        description: string;
+        pubDate: Date;
+        tags?: string[];
+    };
+}
+
+const { frontmatter } = Astro.props;
+
+const formatDate = (date: Date) => {
+    return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+};
+---
+
+<Layout title={`${frontmatter.title} - José Enrique`}>
+    <!-- Contenido Principal -->
+    <div class="relative z-[200] bg-background">
+        <div class="bg-background pb-16">
+            <Navbar showClose={true} />
+            <div style="padding-top: 58px;">
+                <article class="px-3 max-w-[800px] mx-auto mt-8 md:mt-12">
+                    <!-- Header -->
+                    <header class="mb-8 text-center">
+                        <h1 class="text-2xl md:text-3xl font-medium text-white">
+                            {frontmatter.title}
+                        </h1>
+                    </header>
+
+                    <!-- Divider -->
+                    <div class="w-full h-px bg-zinc-800 mb-4"></div>
+
+                    <!-- Date and Share -->
+                    <div class="flex justify-between items-center mb-8">
+                        <p
+                            class="uppercase"
+                            style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 18px; font-weight: 400; color: #71717a;"
+                        >
+                            {formatDate(frontmatter.pubDate)}
+                        </p>
+
+                        <!-- Share Button with Dropdown -->
+                        <div class="share-container relative">
+                            <button
+                                class="share-trigger share-icon"
+                                aria-label="Share this post"
+                                title="Share"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    viewBox="0 0 48 48"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M37.75,20.25 C38.6681734,20.25 39.4211923,20.9571103 39.4941988,21.8564728 L39.5,22 L39.5,36.25 C39.5,39.3517853 37.0439828,41.879937 33.9705557,41.9958479 L33.75,42 L14.25,42 C11.1482147,42 8.62006299,39.5439828 8.50415208,36.4705557 L8.5,36.25 L8.5,22 C8.5,21.0335017 9.28350169,20.25 10.25,20.25 C11.1681734,20.25 11.9211923,20.9571103 11.9941988,21.8564728 L12,22 L12,36.25 C12,37.440864 12.9251616,38.4156449 14.0959512,38.4948092 L14.25,38.5 L33.75,38.5 C34.940864,38.5 35.9156449,37.5748384 35.9948092,36.4040488 L36,36.25 L36,22 C36,21.0335017 36.7835017,20.25 37.75,20.25 Z M23.4989075,6.26787884 L23.6477793,6.25297693 L23.8225053,6.25140103 L23.9770074,6.26441014 L24.1549097,6.29667263 L24.223898,6.31492315 C24.4192207,6.36884271 24.6069182,6.4577966 24.7773762,6.58126437 L24.8968901,6.67628678 L24.989825,6.76256313 L32.7679996,14.5407377 C33.4514171,15.2241552 33.4514171,16.3321939 32.7679996,17.0156115 C32.1247831,17.6588279 31.1054316,17.6966642 30.4179639,17.1291203 L30.2931259,17.0156115 L25.5,12.222 L25.5,31.5 C25.5,32.4181734 24.7928897,33.1711923 23.8935272,33.2441988 L23.75,33.25 C22.8318266,33.25 22.0788077,32.5428897 22.0058012,31.6435272 L22,31.5 L22,12.226 L17.2116504,17.0156115 C16.5684339,17.6588279 15.5490824,17.6966642 14.8616148,17.1291203 L14.7367767,17.0156115 C14.0935602,16.372395 14.055724,15.3530435 14.6232679,14.6655758 L14.7367767,14.5407377 L22.488804,6.78678454 C22.5446792,6.72871358 22.6045271,6.67449255 22.6679103,6.62455868 L22.7812362,6.54379243 C22.8189499,6.51724 22.858413,6.49312256 22.8988638,6.47056335 L22.9176605,6.46138558 C23.0947495,6.36422067 23.2909216,6.29776289 23.4989075,6.26787884 Z"
+                                    ></path>
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div class="share-dropdown hidden">
+                                <!-- LinkedIn -->
+                                <a
+                                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="share-option"
+                                >
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                                        ></path>
+                                    </svg>
+                                    <span>Share on LinkedIn</span>
+                                </a>
+
+                                <!-- X (Twitter) -->
+                                <a
+                                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(frontmatter.title)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="share-option"
+                                >
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                                        ></path>
+                                    </svg>
+                                    <span>Share on X</span>
+                                </a>
+
+                                <!-- Instagram -->
+                                <a
+                                    href="https://www.instagram.com/joseenrique_mm/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="share-option"
+                                >
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                                        ></path>
+                                    </svg>
+                                    <span>Share on Instagram</span>
+                                </a>
+
+                                <!-- Email -->
+                                <a
+                                    href={`mailto:?subject=${encodeURIComponent(frontmatter.title)}&body=${encodeURIComponent(Astro.url.href)}`}
+                                    class="share-option"
+                                >
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                                        ></path>
+                                    </svg>
+                                    <span>Email</span>
+                                </a>
+
+                                <!-- Copy Link -->
+                                <button
+                                    class="share-option copy-link-btn"
+                                    data-url={Astro.url.href}
+                                >
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"
+                                        ></path>
+                                    </svg>
+                                    <span class="copy-text">Copy link</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="prose">
+                        <slot />
+                    </div>
+
+                    <!-- Back link -->
+                </article>
+
+                <!-- Scroll to Top Button -->
+                <button
+                    class="scroll-to-top"
+                    aria-label="Scroll to top"
+                    title="Scroll to top"
+                >
+                    <svg class="progress-ring" width="44" height="44">
+                        <circle
+                            class="progress-ring-bg"
+                            stroke="#2a2a2a"
+                            stroke-width="2"
+                            fill="transparent"
+                            r="18"
+                            cx="22"
+                            cy="22"></circle>
+                        <circle
+                            class="progress-ring-circle"
+                            stroke="#fde047"
+                            stroke-width="2"
+                            fill="transparent"
+                            r="18"
+                            cx="22"
+                            cy="22"></circle>
+                    </svg>
+                    <svg
+                        class="arrow-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+                    </svg>
+                </button>
+
+                <!-- Fixed Back to Blog Button -->
+                <a
+                    href="/blog"
+                    class="fixed-back-link"
+                    aria-label="Back to all posts"
+                >
+                    <span class="text-yellow-300 mr-1">[</span><span
+                        class="back-text">Back to all posts</span
+                    ><span class="text-yellow-300 ml-1">]</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <Footer />
+</Layout>
+
+<style is:global>
+    /* Prose styles for markdown content */
+    .prose {
+        font-size: 15px;
+        line-height: 1.75;
+        color: #e4e4e7;
+    }
+
+    .prose h2 {
+        font-size: 1.5em;
+        font-weight: 600;
+        color: #ffffff;
+        margin-top: 2em;
+        margin-bottom: 0.75em;
+    }
+
+    .prose h3 {
+        font-size: 1.25em;
+        font-weight: 600;
+        color: #ffffff;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+
+    .prose p {
+        margin-bottom: 1.25em;
+    }
+
+    .prose a {
+        color: #fde047;
+        text-decoration: none;
+        border-bottom: 1px dotted rgba(253, 224, 71, 0.5);
+        transition: border-bottom-color 150ms ease;
+    }
+
+    .prose a:hover {
+        border-bottom-color: #fde047;
+    }
+
+    .prose strong {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .prose ul,
+    .prose ol {
+        margin-bottom: 1.25em;
+        padding-left: 1.5em;
+    }
+
+    .prose li {
+        margin-bottom: 0.5em;
+    }
+
+    .prose ul li::marker {
+        color: #fde047;
+    }
+
+    .prose ol li::marker {
+        color: #fde047;
+    }
+
+    .prose blockquote {
+        border-left: 3px solid #fde047;
+        padding-left: 1em;
+        margin: 1.5em 0;
+        color: #a1a1aa;
+        font-style: italic;
+    }
+
+    .prose code {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.875em;
+        background-color: #1c1c1c;
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        color: #fde047;
+    }
+
+    .prose pre {
+        background-color: #1c1c1c;
+        padding: 1em;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 1.5em 0;
+    }
+
+    .prose pre code {
+        background-color: transparent;
+        padding: 0;
+        font-size: 0.875em;
+        color: #e4e4e7;
+    }
+
+    .prose table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5em 0;
+    }
+
+    .prose th,
+    .prose td {
+        border: 1px solid #3f3f46;
+        padding: 0.5em 1em;
+        text-align: left;
+    }
+
+    .prose th {
+        background-color: #1c1c1c;
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .prose img {
+        border-radius: 8px;
+        margin: 1.5em 0;
+    }
+
+    .prose hr {
+        border: none;
+        border-top: 1px solid #3f3f46;
+        margin: 2em 0;
+    }
+</style>
+
+<style>
+    .text-link {
+        cursor: pointer;
+        font-weight: 500;
+        padding: 0 2px;
+        border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        transition:
+            background-color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+            color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+            border-bottom-color 150ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .text-link:hover {
+        background-color: rgba(253, 224, 71, 0.1);
+        color: #fde047;
+        border-bottom-color: #fde047;
+    }
+
+    .share-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #71717a;
+        cursor: pointer;
+        transition:
+            color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+            transform 150ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .share-icon:hover {
+        color: #fde047;
+        transform: scale(1.1);
+    }
+
+    .share-container {
+        position: relative;
+    }
+
+    .share-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 8px;
+        min-width: 200px;
+        background-color: #1c1c1c;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        padding: 8px 0;
+        z-index: 100;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .share-dropdown.hidden {
+        display: none;
+    }
+
+    .share-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 16px;
+        color: #e4e4e7;
+        font-size: 14px;
+        text-decoration: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition:
+            background-color 150ms ease,
+            color 150ms ease;
+    }
+
+    .share-option:hover {
+        color: #fde047;
+    }
+
+    .share-option svg {
+        flex-shrink: 0;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const trigger = document.querySelector(
+            ".share-trigger",
+        ) as HTMLElement | null;
+        const dropdown = document.querySelector(
+            ".share-dropdown",
+        ) as HTMLElement | null;
+        const copyBtn = document.querySelector(
+            ".copy-link-btn",
+        ) as HTMLButtonElement | null;
+        const copyText = document.querySelector(
+            ".copy-text",
+        ) as HTMLElement | null;
+
+        if (trigger && dropdown) {
+            // Toggle dropdown
+            trigger.addEventListener("click", (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle("hidden");
+            });
+
+            // Close when clicking outside
+            document.addEventListener("click", () => {
+                dropdown.classList.add("hidden");
+            });
+
+            // Prevent closing when clicking inside dropdown
+            dropdown.addEventListener("click", (e) => {
+                e.stopPropagation();
+            });
+        }
+
+        if (copyBtn) {
+            copyBtn.addEventListener("click", async () => {
+                const url = copyBtn.getAttribute("data-url");
+                if (url) {
+                    try {
+                        await navigator.clipboard.writeText(url);
+                        // Visual feedback
+                        if (copyText) {
+                            copyText.textContent = "Copied!";
+                            setTimeout(() => {
+                                copyText.textContent = "Copy link";
+                            }, 1500);
+                        }
+                    } catch (err) {
+                        console.error("Failed to copy:", err);
+                    }
+                }
+            });
+        }
+
+        // Scroll to top functionality
+        const scrollBtn = document.querySelector(
+            ".scroll-to-top",
+        ) as HTMLButtonElement | null;
+        const progressCircle = document.querySelector(
+            ".progress-ring-circle",
+        ) as SVGCircleElement | null;
+
+        if (scrollBtn && progressCircle) {
+            const radius = 18;
+            const circumference = 2 * Math.PI * radius;
+
+            // Set initial state
+            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressCircle.style.strokeDashoffset = `${circumference}`;
+            progressCircle.style.transform = "rotate(-90deg)";
+            progressCircle.style.transformOrigin = "50% 50%";
+
+            // Update progress on scroll
+            const updateProgress = () => {
+                const scrollTop = window.scrollY;
+                const docHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
+                const offset = circumference - scrollPercent * circumference;
+                progressCircle.style.strokeDashoffset = `${offset}`;
+
+                // Show/hide button based on scroll position
+                if (scrollTop > 200) {
+                    scrollBtn.classList.add("visible");
+                } else {
+                    scrollBtn.classList.remove("visible");
+                }
+            };
+
+            window.addEventListener("scroll", updateProgress);
+            updateProgress();
+
+            // Scroll to top on click
+            scrollBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                // Use Lenis if available, otherwise fallback to native scroll
+                const lenis = (window as any).lenis;
+                if (lenis && typeof lenis.scrollTo === "function") {
+                    lenis.scrollTo(0, { immediate: false });
+                } else {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth",
+                    });
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    .scroll-to-top {
+        position: fixed;
+        bottom: 100px;
+        right: 24px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 300ms ease,
+            visibility 300ms ease,
+            transform 150ms ease;
+        z-index: 100;
+    }
+
+    .scroll-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .scroll-to-top:hover .arrow-icon {
+        color: #fde047;
+    }
+
+    .scroll-to-top:hover .progress-ring-circle {
+        stroke: #fde047;
+    }
+
+    .progress-ring {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .arrow-icon {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        color: #71717a;
+        transition: color 150ms ease;
+    }
+
+    .fixed-back-link {
+        /* Shared styles */
+        display: flex;
+        align-items: center;
+        gap: 0;
+        text-decoration: none;
+        z-index: 100;
+
+        /* Mobile styles (Default) */
+        position: relative;
+        width: fit-content;
+        margin: 40px auto 20px;
+        padding: 10px;
+        transform: none;
+    }
+
+    @media (min-width: 768px) {
+        .fixed-back-link {
+            position: fixed;
+            top: 50%;
+            left: -48px;
+            transform: translateY(-50%) rotate(-90deg);
+            margin: 0;
+            transform-origin: center center;
+        }
+    }
+
+    .fixed-back-link:hover .back-text {
+        background-color: rgba(253, 224, 71, 0.1);
+        color: #fde047;
+        border-bottom-color: #fde047;
+    }
+
+    .back-text {
+        color: #71717a;
+        font-size: 15px;
+        font-weight: 500;
+        white-space: nowrap;
+        padding: 0 2px;
+        border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        transition:
+            background-color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+            color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+            border-bottom-color 150ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+</style>
