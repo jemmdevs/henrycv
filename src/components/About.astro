@@ -5,12 +5,16 @@ const experiences = [
     period: "2025 - Present",
     description:
       "Leading design and development for genomic optimization platforms. Driving Research and Development for new software products.",
+    footnote: "1",
+    link: "https://tousys.com",
   },
   {
     team: "General Dynamics",
     period: "2024 - 2025",
     description:
       "Full Stack Engineer for mission-critical systems and architecture. Orchestrated the React 14 to 19 migration, making complex workflows feel intuitive.",
+    footnote: "2",
+    link: "https://www.gdels.com/es",
   },
   {
     team: "Independent Research",
@@ -37,12 +41,23 @@ const experiences = [
         I design and develop software with the belief that it is one of the most
         malleable mediums we have. I see myself as an intermediary between
         people and machines, focusing on how we interact with tools and shaping
-        the interfaces that guide those interactions. Lately, I am fascinated by
-        how different systems connect with each other and how technology can act
-        on our behalf to make the complex feel simple. I currently lead the
-        design and development of interfaces at Tousys, an engineering firm
-        specializing in genomic sequence optimization and general Research and
-        Development. If you have an interesting idea, get in touch.
+        the interfaces that guide those interactions. I currently lead the
+        design and development of interfaces at <a
+          href="https://tousys.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group"
+          ><span class="text-yellow-300">[</span><span class="text-link"
+            >Tousys</span
+          ><span class="text-yellow-300">]</span></a
+        >, an engineering firm specializing in genomic sequence optimization and
+        general Research and Development. If you have an interesting idea, <a
+          href="mailto:jemmdev@gmail.com"
+          class="group"
+          ><span class="text-yellow-300">[</span><span class="text-link"
+            >get in touch</span
+          ><span class="text-yellow-300">]</span></a
+        >.
       </p>
     </div>
 
@@ -72,7 +87,23 @@ const experiences = [
           experiences.map((exp) => (
             <div class="grid grid-cols-6 gap-3">
               <div class="col-span-2">
-                <h3 class="font-medium mb-1 body-text">{exp.team}</h3>
+                <h3 class="font-medium mb-1 body-text">
+                  {exp.link ? (
+                    <a
+                      href={exp.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-link"
+                    >
+                      {exp.team}
+                    </a>
+                  ) : (
+                    exp.team
+                  )}
+                  {exp.footnote && (
+                    <sup class="superscript">{exp.footnote}</sup>
+                  )}
+                </h3>
                 {exp.period && (
                   <p class="font-medium text-white body-text">{exp.period}</p>
                 )}
@@ -96,6 +127,24 @@ const experiences = [
     line-height: 20px;
   }
 
+  /* Link Styling - Matches Footer */
+  .text-link {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0 2px;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+    transition:
+      background-color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+      color 150ms cubic-bezier(0.25, 1, 0.5, 1),
+      border-bottom-color 150ms cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .text-link:hover {
+    background-color: rgba(253, 224, 71, 0.1);
+    color: #fde047;
+    border-bottom-color: #fde047;
+  }
+
   /* Desktop (≥768px): 15px / 21px */
   @media (min-width: 768px) {
     .about-text,
@@ -103,5 +152,14 @@ const experiences = [
       font-size: 15px;
       line-height: 21px;
     }
+  }
+
+  .superscript {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 0;
+    color: #fde047;
+    margin-left: 0;
   }
 </style>

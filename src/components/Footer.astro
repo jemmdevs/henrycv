@@ -40,9 +40,11 @@
             href="https://www.linkedin.com/in/jose-enrique-mateo-munoz-102b28374/"
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-link"
+            class="footer-link-group group"
           >
-            Linkedin<sup class="superscript">1</sup>
+            <span class="footer-link-text">Linkedin</span><sup
+              class="superscript">1</sup
+            >
           </a>
         </p>
         <p>
@@ -50,9 +52,11 @@
             href="https://www.instagram.com/joseenrique_mm/"
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-link"
+            class="footer-link-group group"
           >
-            Instagram<sup class="superscript">2</sup>
+            <span class="footer-link-text">Instagram</span><sup
+              class="superscript">2</sup
+            >
           </a>
         </p>
         <p>
@@ -60,9 +64,11 @@
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-link"
+            class="footer-link-group group"
           >
-            Twitter<sup class="superscript">3</sup>
+            <span class="footer-link-text">Twitter</span><sup
+              class="superscript">3</sup
+            >
           </a>
         </p>
       </span>
@@ -75,8 +81,10 @@
           Let's build something together.
         </p>
         <span>
-          <a href="mailto:jemmdev@gmail.com" class="footer-link">
-            jemmdev@gmail.com<sup class="superscript">4</sup>
+          <a href="mailto:jemmdev@gmail.com" class="footer-link-group group">
+            <span class="footer-link-text">jemmdev@gmail.com</span><sup
+              class="superscript">4</sup
+            >
           </a>
         </span>
       </div>
@@ -103,12 +111,15 @@
     will-change: transform;
   }
 
-  .footer-link {
+  .footer-link-group {
     cursor: pointer;
     font-size: 15px;
     line-height: 140%;
     font-weight: 500;
-    padding: 2px 2px;
+  }
+
+  .footer-link-text {
+    padding: 0 2px;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
     /* Transiciones optimizadas con variables CSS */
     transition:
@@ -120,7 +131,7 @@
         var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
   }
 
-  .footer-link:hover {
+  .footer-link-group:hover .footer-link-text {
     background-color: rgba(253, 224, 71, 0.1);
     color: #fde047;
     border-bottom-color: #fde047;
