@@ -135,14 +135,11 @@ const allColumns = [column1, column2, column3];
 
   /* GPU-accelerated hover transition */
   .project-card {
-    transition:
-      opacity var(--duration-normal, 250ms)
-        var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1)),
-      transform var(--duration-normal, 250ms)
-        var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
+    transition: opacity var(--duration-normal, 250ms)
+      var(--ease-out-quart, cubic-bezier(0.25, 1, 0.5, 1));
     transform: translateZ(0);
     backface-visibility: hidden;
-    will-change: opacity, transform;
+    will-change: opacity;
   }
 
   .project-card:hover {
