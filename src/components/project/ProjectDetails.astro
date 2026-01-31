@@ -1,7 +1,7 @@
 ---
 interface Props {
-  role?: string;
-  collaborators?: string;
+  role?: string | string[];
+  collaborators?: string | string[];
   duration?: string;
   tools?: string | string[];
 }
@@ -13,7 +13,11 @@ const { role, collaborators, duration, tools } = Astro.props;
   role && (
     <div class="col-start-1 col-end-7 md:col-start-5 md:col-end-7 md:mb-8">
       <p class="text-white/40 caption-text uppercase mb-1">Role</p>
-      <p class="text-white body-text">{role}</p>
+      <div class="text-white body-text">
+        {Array.isArray(role)
+          ? role.map((r) => <span class="block">{r}</span>)
+          : role}
+      </div>
     </div>
   )
 }
@@ -22,7 +26,11 @@ const { role, collaborators, duration, tools } = Astro.props;
   collaborators && (
     <div class="col-start-7 col-end-13 md:col-start-7 md:col-end-9 md:mb-8">
       <p class="text-white/40 caption-text uppercase mb-1">Collaborators</p>
-      <p class="text-white body-text">{collaborators}</p>
+      <div class="text-white body-text">
+        {Array.isArray(collaborators)
+          ? collaborators.map((c) => <span class="block">{c}</span>)
+          : collaborators}
+      </div>
     </div>
   )
 }

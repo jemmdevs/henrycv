@@ -30,24 +30,38 @@ import Spacer from "../../components/project/Spacer.astro";
                             />
 
                             <!-- Título sticky (izquierda) -->
-                            <ProjectTitle role="DIGITAL TOOLMAKING">
+                            <ProjectTitle role="Research and Development">
                                 Tousys
                             </ProjectTitle>
 
                             <!-- Descripción (derecha) -->
                             <ProjectBody col={2}>
+                                <p class="mb-4">
+                                    I led the design and development of Alawal,
+                                    a DNA sequence optimization platform. I
+                                    established the modular architecture and
+                                    component system to ensure high scalability
+                                    for complex, data-intensive scientific
+                                    workflows.
+                                </p>
                                 <p>
-                                    Tousys is a project strictly focused on...
-                                    (Content to be populated).
+                                    I owned the implementation of client-side
+                                    logic and API contracts, translating
+                                    technical requirements into a
+                                    production-ready and high-performance web
+                                    interface.
                                 </p>
                             </ProjectBody>
 
                             <!-- Detalles -->
                             <ProjectDetails
-                                role="Product Design"
-                                collaborators="Team"
-                                duration="2025"
-                                tools="Figma, Astro"
+                                role="Full Stack Developer"
+                                collaborators={[
+                                    "Raúl Vazquez Verde",
+                                    "Jesús Mateus López",
+                                ]}
+                                duration="2025 - Present"
+                                tools={["React", "Next.js"]}
                             />
 
                             <!-- Links -->
