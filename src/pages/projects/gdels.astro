@@ -30,29 +30,49 @@ import Spacer from "../../components/project/Spacer.astro";
                             />
 
                             <!-- Título sticky (izquierda) -->
-                            <ProjectTitle role="DIGITAL TOOLMAKING">
+                            <ProjectTitle role="AEROSPACE AND DEFENSE">
                                 General Dynamics
                             </ProjectTitle>
 
                             <!-- Descripción (derecha) -->
                             <ProjectBody col={2}>
+                                <p class="mb-4">
+                                    During 2025, I modernized GDELS’s digital
+                                    infrastructure by migrating legacy systems
+                                    and upgrading React applications to v19. <br
+                                    /> I focused on developing a modular component
+                                    architecture to improve frontend scalability and
+                                    long-term code maintainability.
+                                </p>
                                 <p>
-                                    General Dynamics European Land Systems
-                                    (GDELS) is a project strictly focused on...
-                                    (Content to be populated).
+                                    I designed a secure administration panel for
+                                    asset management under strict compliance
+                                    standards. Throughout the project, I served
+                                    as a technical liaison to align engineering
+                                    solutions with business operational
+                                    requirements.
                                 </p>
                             </ProjectBody>
 
                             <!-- Detalles -->
                             <ProjectDetails
-                                role="Product Design"
-                                collaborators="Team"
+                                role="Full Stack Developer"
+                                collaborators="Adrían Doña"
                                 duration="2025"
-                                tools="Figma, Astro"
+                                tools={["React", "Node.js"]}
                             />
 
                             <!-- Links -->
-                            <LinkCard col={1} href="#"> gdels.com </LinkCard>
+                            <LinkCard col={1} href="https://www.gdels.com/">
+                                gdels.com
+                            </LinkCard>
+
+                            <LinkCard
+                                col={2}
+                                href="https://x.com/GDELS_Official"
+                            >
+                                Twitter
+                            </LinkCard>
 
                             <!-- Divisor -->
                             <Divider />
